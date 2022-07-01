@@ -12,7 +12,8 @@ const videoConstraints = {
 const App = () => {
   const [img, setImg] = useState(null);
   const downloadImage = () => {
-    if (!img) return;
+    if (!img) 
+      return;
     var a = document.createElement("a");
     a.href = img;
     a.download = "image.png";
