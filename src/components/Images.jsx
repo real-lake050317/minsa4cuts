@@ -1,13 +1,13 @@
+import { useSlotProps } from "@mui/base";
 import React from "react";
 
-const Images = ({ images }) => {
+const Images = (props) => {
+  var data = props.images;
   return (
-    <div className="images">
-      {images.map((image, index) => (
-        <img key={index} src={image} alt="image" />
-      ))}
-    </div>
-  );
+    data.map((image, index) => (
+      <img src = {image} class = {index}/>
+    ))
+  )
 };
 
 export default Images;

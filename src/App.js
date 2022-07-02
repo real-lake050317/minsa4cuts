@@ -16,8 +16,7 @@ const App = () => {
   const [cnt, setCnt] = useState(0);
   const [img, setImg] = useState(null);
   const [name, setName] = useState("");
-
-  const pictures = [];
+  const [pictures, setPictures] = useState([]);
 
   const downloadImage = (cnt) => {
     if (!img) return;
@@ -41,6 +40,10 @@ const App = () => {
     if (cnt === 4) setCnt(0);
   }, [cnt])
 
+  useEffect(() => {
+    console.log(pictures);
+  }, [pictures])
+
   return (
     <>
       <TextField
@@ -59,9 +62,12 @@ const App = () => {
         {({ getScreenshot }) => (
           <button
             onClick={(cnt) => {
-              setImg(getScreenshot());
+              var temp = pictures;
+              setImg(getScreenshot());  
               setCnt((cnt) => cnt + 1);
               pictures.push(img);
+              setPictures(temp);
+              //console.log(pictures);
             }}
           >
             Capture photo
@@ -70,7 +76,7 @@ const App = () => {
       </Webcam>
       <h1>{cnt}</h1>
       <img src={img} />
-      <Images images = {pictures} />
+      <Images images = {pictures}/>
       <button onClick={() => downloadImage()}>download</button>
     </>
   );
