@@ -11,6 +11,12 @@ const videoConstraints = {
 };
 
 const App = () => {
+  const print = () => {
+    console.log("Hi");
+  };
+  const takePicture = () => {
+    const img = Webcam.getScreenshot();
+  };
   let alphabet = ["a", "b", "c", "d"];
   //let [pictures, setPictures] = useState([]);
   const [cnt, setCnt] = useState(0);
@@ -38,11 +44,11 @@ const App = () => {
 
   useEffect(() => {
     if (cnt === 4) setCnt(0);
-  }, [cnt])
+  }, [cnt]);
 
   useEffect(() => {
-    console.log(pictures);
-  }, [pictures])
+    //console.log(pictures);
+  }, [pictures]);
 
   return (
     <>
@@ -62,12 +68,14 @@ const App = () => {
         {({ getScreenshot }) => (
           <button
             onClick={(cnt) => {
-              var temp = pictures;
-              setImg(getScreenshot());  
-              setCnt((cnt) => cnt + 1);
-              pictures.push(img);
-              setPictures(temp);
-              //console.log(pictures);
+              for (var i = 0; i < 4; i++) {
+                var temp = pictures;
+                setImg(getScreenshot());
+                //setCnt((cnt) => cnt + 1);
+                pictures.push(img);
+                setPictures(temp);
+                console.log(i);
+              }
             }}
           >
             Capture photo
@@ -75,8 +83,7 @@ const App = () => {
         )}
       </Webcam>
       <h1>{cnt}</h1>
-      <img src={img} />
-      <Images images = {pictures}/>
+      <Images images={pictures} />
       <button onClick={() => downloadImage()}>download</button>
     </>
   );
